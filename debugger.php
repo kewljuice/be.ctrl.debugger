@@ -112,7 +112,7 @@ function debugger_civicrm_caseTypes(&$caseTypes) {
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_caseTypes
  */
 function debugger_civicrm_angularModules(&$angularModules) {
-_debugger_civix_civicrm_angularModules($angularModules);
+  _debugger_civix_civicrm_angularModules($angularModules);
 }
 
 /**
@@ -125,12 +125,39 @@ function debugger_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
 }
 
 /**
+ * Implements hook_civicrm_buildForm().
+ */
+function debugger_civicrm_buildForm($formName, &$form) {
+  watchdog('be.ctrl.debugger buildForm', 'formName:' . print_r($formName, true));
+  // watchdog('be.ctrl.debugger buildForm', 'form:' . '<pre>' . print_r($form, true) . '</pre>');
+}
+
+/**
  * Implements hook_civicrm_preProcess().
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_preProcess
  */
 function debugger_civicrm_preProcess($formName, &$form) {
-	// https://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_post
-	watchdog('be.ctrl.debugger', print_r($formName, true));
-	watchdog('be.ctrl.debugger', print_r($form, true));
-} 
+  watchdog('be.ctrl.debugger preProcess', 'formName:' . print_r($formName, true));
+  // watchdog('be.ctrl.debugger preProcess', 'form:' . '<pre>' . print_r($form, true) . '</pre>');
+}
+
+/**
+ * Implements hook_civicrm_pre().
+ */
+function debugger_civicrm_pre($op, $objectName, $objectId, &$objectRef) {
+  watchdog('be.ctrl.debugger pre', 'op:' . print_r($op, true));
+  watchdog('be.ctrl.debugger pre', 'objectName:' . print_r($objectName, true));
+  watchdog('be.ctrl.debugger pre', 'objectId:' . print_r($objectId, true));
+  watchdog('be.ctrl.debugger pre', 'objectRef:' . '<pre>' . print_r($objectRef, true) . '</pre>');
+}
+
+/**
+ * Implements hook_civicrm_post().
+ */
+function debugger_civicrm_post($op, $objectName, $objectId, &$objectRef) {
+  watchdog('be.ctrl.debugger post', 'op:' . print_r($op, true));
+  watchdog('be.ctrl.debugger post', 'objectName:' . print_r($objectName, true));
+  watchdog('be.ctrl.debugger post', 'objectId:' . print_r($objectId, true));
+  watchdog('be.ctrl.debugger post', 'objectRef:' . '<pre>' . print_r($objectRef, true) . '</pre>');
+}
