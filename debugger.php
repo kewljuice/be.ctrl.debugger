@@ -143,6 +143,16 @@ function debugger_civicrm_preProcess($formName, &$form) {
 }
 
 /**
+ * Implements hook_civicrm_postProcess().
+ *
+ * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_postProcess
+ */
+function debugger_civicrm_postProcess($formName, &$form) {
+  watchdog('be.ctrl.debugger postProcess', 'formName:' . print_r($formName, true));
+  // watchdog('be.ctrl.debugger preProcess', 'form:' . '<pre>' . print_r($form, true) . '</pre>');
+}
+
+/**
  * Implements hook_civicrm_pre().
  */
 function debugger_civicrm_pre($op, $objectName, $objectId, &$objectRef) {
